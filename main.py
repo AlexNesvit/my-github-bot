@@ -9,8 +9,8 @@ def makeCommits(days: int):
         os.system('git push')
     else:
         dates = f"{days} days ago"
-        # Generate a random number of commits between 1 and 22
-        num_commits = random.randint(1, 22)
+        # Generate a random number of commits between 0 and 22
+        num_commits = random.randint(0, 22)
         with open('data.txt', 'a') as file:
             for _ in range(num_commits):
                 file.write(f'{dates} <- this was the commit for the day!!\n')
@@ -23,4 +23,4 @@ def makeCommits(days: int):
 
         return days * makeCommits(days - 1)
 
-makeCommits(365)
+makeCommits(30)
