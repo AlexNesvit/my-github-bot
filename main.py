@@ -1,5 +1,6 @@
 import os
 import random
+from datetime import datetime, timedelta
 
 
 def makeCommits(days: int):
@@ -10,22 +11,27 @@ def makeCommits(days: int):
         # If no more days left, push all commits to the repository
         os.system('git push')
     else:
-        dates = f"{days} days ago"
+        # Set the base date for the commits
+        base_date = datetime.now() - timedelta(days=days)
+
         # Generate a random number of commits between 0 and 22 (inclusive)
         num_commits = random.randint(0, 22)
 
         if num_commits > 0:
-            # If there are commits to make, write dummy data into the file
             with open('data.txt', 'a') as file:
-                for _ in range(num_commits):
-                    file.write(f'{dates} <- this was the commit for the day!!\n')
+                for i in range(num_commits):
+                    file.write(f'{base_date} <- this was the commit #{i + 1} for the day!!\n')
 
             # Stage the file to prepare for the commit
             os.system('git add data.txt')
 
-            # Make the specified number of commits with the same date
-            for _ in range(num_commits):
-                os.system(f'git commit --date="{dates}" -m "Random commit!"')
+            for i in range(num_commits):
+                # Create a unique commit time for each commit
+                commit_time = base_date + timedelta(minutes=i * 10)
+                commit_date = commit_time.strftime('%Y-%m-%d %H:%M:%S')
+
+                # Make the commit with the specific date and unique message
+                os.system(f'git commit --date="{commit_date}" -m "Random commit #{i + 1}!"')
 
         # Recursive call to handle the previous day
         makeCommits(days - 1)
