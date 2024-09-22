@@ -3,6 +3,13 @@ import random
 from datetime import datetime, timedelta
 
 
+def cleanUpFiles():
+    # Get all files that match the pattern "data_*.txt"
+    for filename in os.listdir('.'):
+        if filename.startswith('data_') and filename.endswith('.txt'):
+            os.remove(filename)
+
+
 def makeCommits(days: int):
     if days < 1:
         # Push all commits to the repository after all commits are made
@@ -34,5 +41,8 @@ def makeCommits(days: int):
         makeCommits(days - 1)
 
 
-# Start the process with (x) days
-makeCommits(15)
+# Start the process with 23 days
+makeCommits(1)
+
+# Clean up files after all commits are done
+cleanUpFiles()
