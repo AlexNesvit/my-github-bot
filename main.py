@@ -41,8 +41,8 @@ def makeCommits(days: int):
         makeCommits(days - 1)
 
 
-# Start the process with 23 days
-makeCommits(1)
+# Start the process with X days
+makeCommits(10)
 
 # Clean up files after all commits are done
 cleanUpFiles()
