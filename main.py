@@ -42,7 +42,7 @@ def makeCommits(days: int):
 
 
 # Start the process with X days
-makeCommits(11)
+makeCommits(5)
 
 # Clean up files after all commits are done
 cleanUpFiles()
